@@ -40,6 +40,7 @@ public class Review {
         if (nota < 0 || nota > 10) {
             throw new IllegalArgumentException("A nota deve estar entre 0 e 10.");
         }
+        this.nota = nota;
     }
 
     public Review(String texto, String autor, LocalDate dataDoPost, int nota) {
