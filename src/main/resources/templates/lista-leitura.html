@@ -19,15 +19,15 @@
         <a href="/lista">minha lista</a>
     </aside>
     <main>
-        <form id="form-livro" th:action="@{/livros}" th:object="${livro}" method="post">
-            <label for="titulo">Título:</label>
-            <input type="text" placeholder="Título do livro" name="titulo" required>
-            <label for="autor">Autor:</label>
-            <input type="text" placeholder="Autor do livro" name="autor" required>
-            <label for="descricao">Descrição:</label>
-            <textarea title="Descrição" placeholder="Sinopse do livro" name="descricao"></textarea>
-            <button type="submit">Adicionar</button>
-        </form>
+        <section>
+            <h2>Minha lista</h2>
+            <ol>
+                <li th:each="livro : ${livroslista}">
+                    <article><span id="titulo" th:text="${livro.titulo}" />, <span id="autor"
+                            th:text="${livro.autor}" /></article>
+                </li>
+            </ol>
+        </section>
     </main>
 </body>
 

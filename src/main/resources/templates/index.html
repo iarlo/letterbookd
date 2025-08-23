@@ -8,6 +8,60 @@
     <link rel="stylesheet" href="/estilos.css">
     <link rel="stylesheet" href="../static/estilos.css">
     <title>📚 letterbookd</title>
+
+    <style>
+        .secao-livros {
+            margin-bottom: 2.5em;
+        }
+
+        .secao-livros h2 {
+            font-size: 1.4em;
+            margin-bottom: 1em;
+            padding-left: 0.6em;
+            color: #2c3e50;
+        }
+
+        .lista-livros {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1em;
+        }
+
+        .livro-card {
+            background: #ecf0f1;
+            padding: 1em;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4em;
+        }
+
+        .livro-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .livro-card.link {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .titulo {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #2c3e50;
+        }
+
+        .autor {
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+    </style>
 </head>
 
 <body>
@@ -19,35 +73,42 @@
         <a href="/lista">minha lista</a>
     </aside>
     <main>
-        <section>
-            <h2>Últimos livros lidos</h2>
-            <ol>
+        <section class="secao-livros">
+            <h2>📖 Últimos livros lidos</h2>
+            <ol class="lista-livros">
                 <li th:each="livro : ${livroslidos}">
-                    <article>
-                        <span id="titulo" th:text="${livro.titulo}" />, <span id="autor" th:text="${livro.autor}" />
+                    <article class="livro-card">
+                        <span class="titulo" th:text="${livro.titulo}"></span>
+                        <span class="autor" th:text="${livro.autor}"></span>
                     </article>
                 </li>
             </ol>
         </section>
-        <section>
-            <h2>Minha lista</h2>
-            <ol>
+
+        <section class="secao-livros">
+            <h2>📝 Minha lista</h2>
+            <ol class="lista-livros">
                 <li th:each="livro : ${livroslista}">
-                    <article><span id="titulo" th:text="${livro.titulo}" />, <span id="autor"
-                            th:text="${livro.autor}" /></article>
+                    <article class="livro-card">
+                        <span class="titulo" th:text="${livro.titulo}"></span>
+                        <span class="autor" th:text="${livro.autor}"></span>
+                    </article>
                 </li>
             </ol>
         </section>
-        <section>
-            <h2>Últimos livros adicionados</h2>
-            <ol>
+
+        <section class="secao-livros">
+            <h2>✨ Últimos livros adicionados</h2>
+            <ol class="lista-livros">
                 <li th:each="livro : ${livrosadicionados}">
-                    <a th:href="@{'/livros/' + ${livro.id}}" class="livro">
-                        <span id="titulo" th:text="${livro.titulo}" />, <span id="autor" th:text="${livro.autor}" />
+                    <a th:href="@{'/livros/' + ${livro.id}}" class="livro-card link">
+                        <span class="titulo" th:text="${livro.titulo}"></span>
+                        <span class="autor" th:text="${livro.autor}"></span>
                     </a>
                 </li>
             </ol>
         </section>
+
     </main>
 </body>
 

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/modern-normalize@3.0.1/modern-normalize.css">
+    <link rel="stylesheet" href="/estilos.css">
+    <link rel="stylesheet" href="../static/estilos.css">
+    <title>📚 letterbookd</title>
+</head>
+
+<body>
+    <aside>
+        <h1>📚 letterbookd</h1>
+        <span>links rápidos</span>
+        <a href="/">página inicial</a>
+        <a href="/livros/adicionar">adicionar livro</a>
+        <a href="/lista">minha lista</a>
+    </aside>
+    <main>
+        <form th:action="@{/avaliar/{id}(id=${livro.id})}" th:object="${review}" method="post">
+            <label for="autor">Nome:</label>
+            <input type="text" placeholder="Seu nome" name="autor" required>
+            <label for="texto">Avaliação:</label>
+            <textarea title="Deixe algum comentário sobre o livro" placeholder="Deixe algum comentário sobre o livro"
+                name="texto"></textarea>
+
+            <label for="nota">Nota:</label>
+            <div class="range">
+                <input type="range" id="nota" name="nota" min="1" max="10" value="5" list="tickmarks">
+                <div class="legenda-range">
+                    <span>1</span>
+                    <span>2</span>
+                    <span>3</span>
+                    <span>4</span>
+                    <span>5</span>
+                    <span>6</span>
+                    <span>7</span>
+                    <span>8</span>
+                    <span>9</span>
+                    <span>10</span>
+                </div>
+            </div>
+            <button type="submit" style="margin-top: 1em;">Avaliar</button>
+        </form>
+    </main>
+</body>
+
+</html>

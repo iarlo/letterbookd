@@ -19,30 +19,69 @@
         <a href="/lista">minha lista</a>
     </aside>
     <main>
-        <section>
+        <section class="livro-card">
             <article>
                 <section class="livro-section">
                     <div>
                         <h3 id="titulo" th:text="${livro.titulo}">Título do livro</h3>
-                        <span id="autor" th:text="${livro.autor}" />
+                        <span id="autor" class="livro-autor" th:text="${livro.autor}">Autor</span>
                     </div>
                     <div class="livro-acoes">
-                        <a th:href="@{'/lista/' + ${livro.id}}">avaliar</a>
-                        <a th:href="@{'/livros/editar/' + ${livro.id}}">editar</a>
-                        <a th:href="@{'/livros/excluir/' + ${livro.id}}" id="excluir">excluir</a>
+                        <a th:href="@{'/livros/editar/' + ${livro.id}}" class="btn-acao">Editar</a>
+                        <a th:href="@{'/livros/excluir/' + ${livro.id}}" id="excluir"
+                            class="btn-acao btn-excluir">Excluir</a>
                     </div>
                 </section>
-                <section>
-                    <p th:text="${#strings.isEmpty(livro.descricao) ? 'Sem descrição' : livro.descricao}"></p>
+
+                <section class="livro-descricao">
+                    <p th:text="${#strings.isEmpty(livro.descricao) ? 'Sem descrição' : livro.descricao}">
+                        Descrição do livro...
+                    </p>
                 </section>
-                <section>
-                    <h4>Avaliações</h4>
-                    <ul>
-                        <!-- <li th:each="comentario : ${livro.comentarios}" th:text="${comentario.texto}"></li> -->
+
+                <section class="livro-reviews">
+                    <h4 th:text="${reviews.size()} + ' Avaliações'">Avaliações</h4>
+                    <form th:action="@{/avaliar/{id}(id=${livro.id})}" th:object="${review}" method="post">
+                        <label for="autor">Nome:</label>
+                        <input type="text" placeholder="Seu nome" name="autor" required>
+                        <label for="texto">Avaliação:</label>
+                        <textarea title="Deixe algum comentário sobre o livro"
+                            placeholder="Deixe algum comentário sobre o livro" name="texto"></textarea>
+
+                        <label for="nota">Nota:</label>
+                        <div class="range">
+                            <input type="range" id="nota" name="nota" min="1" max="10" value="5" list="tickmarks">
+                            <div class="legenda-range">
+                                <span>1</span>
+                                <span>2</span>
+                                <span>3</span>
+                                <span>4</span>
+                                <span>5</span>
+                                <span>6</span>
+                                <span>7</span>
+                                <span>8</span>
+                                <span>9</span>
+                                <span>10</span>
+                            </div>
+                        </div>
+                        <button type="submit" style="margin-top: 1em;">Avaliar</button>
+                    </form>
+                    <ul class="comentarios">
+                        <li th:each="comentario : ${reviews}">
+                            <img src="https://www.gravatar.com/avatar/?d=mp" alt="Foto de perfil" class="avatar">
+                            <div class="comentario-texto">
+                                <strong th:text="${comentario.autor}" id="autor">Autor</strong>
+                                <p>
+                                    <span th:text="${comentario.nota} + '/10 - '" id="nota" class="nota">Nota</span>
+                                    <span th:text="${comentario.texto}">Comentário</span>
+                                </p>
+                            </div>
+                        </li>
                     </ul>
                 </section>
             </article>
         </section>
+
     </main>
 </body>
 
