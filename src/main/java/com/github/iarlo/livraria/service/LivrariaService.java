@@ -40,6 +40,7 @@ public class LivrariaService {
         if (livrojaexiste != null) {
             livrojaexiste.setTitulo(novoLivro.getTitulo());
             livrojaexiste.setAutor(novoLivro.getAutor());
+            livrojaexiste.setDescricao(novoLivro.getDescricao());
             livroRepository.editar(id, livrojaexiste);
             return livrojaexiste;
         }
@@ -64,7 +65,7 @@ public class LivrariaService {
     private void verificarDuplo(Livro livro) {
         boolean existe = livroRepository.buscarTodos().stream()
                 .anyMatch(l -> l.getTitulo().equalsIgnoreCase(livro.getTitulo())
-                        && l.getAutor().equalsIgnoreCase(livro.getAutor()));
+                && l.getAutor().equalsIgnoreCase(livro.getAutor()));
         if (existe) {
             throw new IllegalArgumentException("Livro já cadastrado: "
                     + livro.getTitulo() + " - " + livro.getAutor());

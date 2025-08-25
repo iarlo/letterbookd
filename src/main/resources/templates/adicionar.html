@@ -20,6 +20,8 @@
     </aside>
     <main>
         <form id="form-livro" th:action="@{/livros}" th:object="${livro}" method="post">
+            <h2>➕ Adicionar livro</h2>
+
             <label for="titulo">Título:</label>
             <input type="text" placeholder="Título do livro" name="titulo" required>
             <label for="autor">Autor:</label>

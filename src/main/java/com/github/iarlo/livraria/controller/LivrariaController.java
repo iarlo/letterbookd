@@ -48,14 +48,14 @@ public class LivrariaController {
     public String exibirFormularioEditar(@PathVariable int id, Model model) {
         Livro livro = livrariaService.buscarPorId(id);
         model.addAttribute("livro", livro);
-        return "form-livro";
+        return "editar";
     }
 
     @PostMapping("/editar/{id}")
     public String editarLivro(@PathVariable int id, @ModelAttribute Livro livro) {
         livro.setId(id);
         livrariaService.editar(id, livro);
-        return "redirect:/livros";
+        return "redirect:/livros/{id}";
     }
 
     // Excluir livro

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://unpkg.com/modern-normalize@3.0.1/modern-normalize.css" />
+    <link rel="stylesheet" href="/estilos.css" />
+    <link rel="stylesheet" href="../static/estilos.css" />
+    <title>📚 letterbookd</title>
+</head>
+
+<body>
+    <aside>
+        <h1>📚 letterbookd</h1>
+        <span>links rápidos</span>
+        <a href="/">página inicial</a>
+        <a href="/livros/adicionar">adicionar livro</a>
+        <a href="/lista">minha lista</a>
+    </aside>
+    <main>
+        <form th:action="@{'/livros/editar/' + ${livro.id}}" method="post" id="form-livro">
+            <h2>✏️ Editar livro</h2>
+
+            <label for="titulo">Título</label>
+            <input type="text" id="titulo" name="titulo" th:value="${livro.titulo}" required>
+
+            <label for="autor">Autor</label>
+            <input type="text" id="autor" name="autor" th:value="${livro.autor}" required>
+
+            <label for="descricao">Descrição</label>
+            <textarea id="descricao" name="descricao" rows="5" th:text="${livro.descricao}"></textarea>
+
+            <div class="form-actions">
+                <a href="/" class="cancelar">Cancelar</a>
+                <button type="submit">Salvar alterações</button>
+            </div>
+        </form>
+        </section>
+    </main>
+</body>
+
+</html>
