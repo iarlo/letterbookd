@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.github.iarlo.livraria.model.Livro;
+import com.github.iarlo.livraria.service.ArquivosService;
 import com.github.iarlo.livraria.service.LivrariaService;
 
 @Controller
@@ -18,6 +19,7 @@ import com.github.iarlo.livraria.service.LivrariaService;
 public class LivrariaController {
 
     private final LivrariaService livrariaService = new LivrariaService();
+    private final ArquivosService arquivosService = new ArquivosService("livros");
 
     // Listar livros
     @GetMapping
@@ -37,6 +39,7 @@ public class LivrariaController {
     @PostMapping
     public String adicionarLivro(@ModelAttribute Livro livro) {
         livrariaService.adicionar(livro);
+        arquivosService.criarArquivo(livro.getTitulo(), livro.getAutor(), livro.getDescricao());
         return "redirect:/";
     }
 
