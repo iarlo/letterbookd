@@ -38,7 +38,14 @@
                         Descrição do livro...
                     </p>
                 </section>
-
+                <section class="form-actions">
+                    <form th:action="@{/lista/lidos/{id}(id=${livro.id})}" method="post">
+                        <button type="submit">Marcar como lido</button>
+                    </form>
+                    <form th:action="@{/lista/{id}(id=${livro.id})}" method="post">
+                        <button type="submit">Adicionar na minha lista</button>
+                    </form>
+                </section>
                 <section class="livro-reviews">
                     <h4 th:text="${reviews.size()} + ' Avaliações'">Avaliações</h4>
                     <form th:action="@{/avaliar/{id}(id=${livro.id})}" th:object="${review}" method="post">

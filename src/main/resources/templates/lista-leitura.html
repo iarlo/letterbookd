@@ -22,7 +22,7 @@
         <section>
             <h2>Minha lista</h2>
             <ol>
-                <li th:each="livro : ${livroslista}">
+                <li th:each="livro : ${livros}">
                     <article><span id="titulo" th:text="${livro.titulo}" />, <span id="autor"
                             th:text="${livro.autor}" /></article>
                 </li>

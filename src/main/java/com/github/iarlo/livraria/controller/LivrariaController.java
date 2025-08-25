@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.github.iarlo.livraria.model.Livro;
 import com.github.iarlo.livraria.service.ArquivosService;
+import com.github.iarlo.livraria.service.ListaService;
 import com.github.iarlo.livraria.service.LivrariaService;
 
 @Controller
@@ -19,6 +20,7 @@ import com.github.iarlo.livraria.service.LivrariaService;
 public class LivrariaController {
 
     private final LivrariaService livrariaService = new LivrariaService();
+    private final ListaService listaService = new ListaService();
     private final ArquivosService arquivosService = new ArquivosService("livros");
 
     // Listar livros
@@ -61,7 +63,10 @@ public class LivrariaController {
     // Excluir livro
     @GetMapping("/excluir/{id}")
     public String excluirLivro(@PathVariable int id) {
+        Livro livro = livrariaService.buscarPorId(id);
         livrariaService.excluir(id);
+        listaService.removeLivroLido(livro);
+        listaService.removeLivroLista(livro);
         return "redirect:/";
     }
 
